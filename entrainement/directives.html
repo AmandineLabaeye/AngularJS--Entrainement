@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Angular JS Test</title>
+</head>
+
+<!-- Ng app défini l'application donc la où va être executer le code Angular JS -->
+
+<body ng-app>
+
+    <!-- Ng model défini une variable réutilisable entre les {{}} pour l'afficher-->
+    <input type="text" ng-model="query">
+
+    <select ng-model="order">
+
+        <option value="username"> Organiser par nom </option>
+        <option value="content"> Organier par contenu </option>
+
+    </select>
+
+    <!-- Ng init permet d'initialiser le tableau -->
+    <div ng-init="users=['Marc', 'Jean', 'John']">
+
+        <!-- ng repeat permet de réaliser la boucle -->
+        <ul>
+            <li ng-repeat="user in users | filter:{content: query}">
+                <p>{{user | uppercase}}</p>
+            </li>
+        </ul>
+
+        <!-- Permet d'afficher le tableau en dur -->
+        {{users}}
+    </div>
+
+    <!-- Ng init permet d'initialiser l'objet (Ressemble au JSON) -->
+    <div ng-init="objets=[{username: 'Marc', content:'Salut les bg'},
+                        {username:'Jean', content:'Salut les gars'}, 
+                        {username: 'John', content:'Salut les mauvais'}]">
+
+        <!-- Permet d'afficher l'objet, en filtrant par le champs query et par ordre soit nom ou contenu-->
+        <div ng-repeat="objet in objets | filter:{content: query} | orderBy:order">
+
+            <p>
+                <!-- affiche l'objet en le pacourant par son nom.variable-->
+                <strong>{{objet.username}}</strong> <br> {{objet.content}}
+            </p>
+
+        </div>
+
+        {{objets}}
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+</body>
+
+</html>
