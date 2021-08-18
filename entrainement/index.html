@@ -2,83 +2,30 @@
 <html lang="fr">
 
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Ce lien est indispensable pour pouvoir se servir des routes -->
+    <script src="https://code.angularjs.org/1.8.2/angular-route.min.js"></script>
+
     <title>Angular JS Test</title>
 </head>
 
-<!-- Ng app défini l'application donc la où va être executer le code Angular JS -->
+<!-- Ng app défini l'application donc la où va être executer le code Angular JS, on lui précise un nom ce qui permet d'en créer plusieurs -->
 
 <body ng-app="myApp">
 
-    <div ng-controller="CommentsCtrl">
+    <!-- Permet de le montrer tant que loading est vrai -->
+    <div ng-show="loading">Chargement...</div>
 
-        <!-- Ng model défini une variable réutilisable entre les {{}} pour l'afficher-->
-        <input type="text" ng-model="query"> {{query}}
+    <!-- Ng view permet de définir les vues, grâce au route précédemment défini -->
+    <div ng-view></div>
 
-        <select ng-model="order">
+    <script src="js/app.js"></script>
 
-            <option value="username"> Organiser par nom </option>
-            <option value="content"> Organier par contenu </option>
+    <script src="js/service/post.js"></script>
 
-        </select>
+    <script src="js/controller/posts.js"></script>
 
-        <div ng-repeat="comment in comments | filter:{content: query} | orderBy:order">
-
-            <p>
-                <strong>{{comment.username}}</strong> <br> {{comment.content}}
-            </p>
-
-            <input type="text" ng-model="query">
-
-        </div>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-
-    <script>
-        var app = angular.module("myApp", []);
-
-        app.controller('CommentsCtrl', function($scope) {
-            console.log($scope)
-
-            $scope.comments = [{
-                "username": "Amandine",
-                "city": "Fourmies",
-                "email": "Amandine@orange.fr",
-                "content": "Cillum qui occaecat sint culpa in nostrud incididunt eiusmod proident minim eiusmod."
-            }, {
-                "username": "Killian",
-                "city": "Villeneuve-Les-Sablons",
-                "email": "Killian@orange.fr",
-                "content": "Reprehenderit adipisicing id eu nisi non."
-            }, {
-                "username": "Isabelle",
-                "city": "Vervins",
-                "email": "Isabelle@orange.fr",
-                "content": "Aute ad voluptate excepteur labore consectetur amet aliqua laboris ad."
-            }, {
-                "username": "Christophe",
-                "city": "Etroeungt",
-                "email": "Christophe@orange.fr",
-                "content": "Adipisicing aliquip ullamco Lorem nisi qui sint."
-            }, {
-                "username": "Anthony",
-                "city": "Anzin",
-                "email": "Anthony@orange.fr",
-                "content": "Fugiat sint consequat in sint dolore eiusmod proident."
-            }, {
-                "username": "Patrick",
-                "city": "Cergy",
-                "email": "Patrick@orange.fr",
-                "content": "Aute eiusmod voluptate ullamco ex dolor deserunt tempor officia eu aliqua."
-            }, {
-                "username": "Sandrine",
-                "city": "Amblainville",
-                "email": "Sandrine@orange.fr",
-                "content": "Aute do consectetur nisi nisi laboris elit."
-            }];
-
-        })
-    </script>
+    <script src="js/controller/comments.js"></script>
 
 </body>
 
